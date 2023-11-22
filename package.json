@@ -111,6 +111,7 @@
     "isarray": "^1.0.0",
     "isexe": "^2.0.0",
     "isobject": "^3.0.1",
+    "jquery": "^3.7.1",
     "kind-of": "^5.1.0",
     "lcid": "^1.0.0",
     "liftoff": "^3.1.0",
@@ -215,7 +216,7 @@
     "yargs-parser": "^5.0.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "gulp watch"
   },
   "keywords": [],
   "author": "",
