@@ -1,5 +1,6 @@
 const gulp = require('gulp');
-const sass = require('gulp-sass')(require('sass'));
+// const sass = require('gulp-sass')(require('sass')); 旧sass
+var sass = require('gulp-dart-sass'); //新sass
 const browserSync = require('browser-sync').create();
 
 // compile scss into css
