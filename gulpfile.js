@@ -1,4 +1,12 @@
-// const gulp = require('gulp');
+//----------------------------------------------------------------------
+//  モード
+//----------------------------------------------------------------------
+"use strict";
+
+
+//----------------------------------------------------------------------
+//  モジュール読み込み
+//----------------------------------------------------------------------
 const { src, dest, watch, parallel, series } = require("gulp");
 // const sass = require('gulp-sass')(require('sass')); //旧sass
 const sass = require('gulp-dart-sass'); //新sass
@@ -10,8 +18,13 @@ const uglify = require("gulp-uglify");
 const fs = require("fs");
 const rename = require("gulp-rename");
 const imagemin = require('gulp-imagemin');
+const mozjpeg = require('imagemin-mozjpeg');
+const pngquant = require("imagemin-pngquant");
 
 
+//----------------------------------------------------------------------
+//  各種関数設定
+//----------------------------------------------------------------------
 
 // sass
 const compileSass = () => {
@@ -49,11 +62,25 @@ const icon = () => {
 // image
 const copyImage = () => {
   return src("./src/assets/**")
-    .pipe(imagemin())
+    .pipe(imagemin([
+      mozjpeg({
+        quality: 80,
+      }),
+      pngquant({
+        quality: [0.6, 0.7],
+        speed: 1,
+      }),
+      imagemin.svgo(),
+      imagemin.optipng(),
+      imagemin.gifsicle({ optimizationLevel: 3 }),
+    ]))
     .pipe(dest('./dist/assets/'))
 }
-    
-    
+
+
+//----------------------------------------------------------------------
+//  watch関数での変更処理
+//----------------------------------------------------------------------
 const watchFiles = () => {
   watch("./src/sass/**/*.scss", { ignoreInitial: false }, compileSass).on("change", reload)
   watch("./src/js/*.js", { ignoreInitial: false }, minifyJs).on("change", reload)
@@ -67,24 +94,29 @@ const watchFiles = () => {
 }
 
 
-// - build時の設定
+//----------------------------------------------------------------------
+//  build時の設定
+//----------------------------------------------------------------------
+
 //Sassのコンパイル
 const buildSass = () => {
   return src("./src/sass/**/*.scss")
     .pipe(sass({ outputStyle: "compressed" }))
     .pipe(dest("./dist/css"))
 }
-//JSの圧縮
+//JSのコンパイル
 const buildJs = () => {
   return src("./src/js/*.js")
     .pipe(uglify())
     .pipe(dest("./dist/js"))
 }
+//jQueryのコンパイル
 const buildJquery = () => {
   return src("./node_modules/jquery/dist/jquery.min.js")
     .pipe(uglify())
     .pipe(dest("./dist/js/jquery"))
 }
+//slickのコンパイル
 
 
 const deletFiles = async (cb) => {
