@@ -117,10 +117,25 @@ const buildJquery = () => {
     .pipe(dest("./dist/js/jquery"))
 }
 //slickのコンパイル
+const buildSlickJs = () => {
+  return src("./node_modules/slick-carousel/slick/slick.min.js")
+    .pipe(uglify())
+    .pipe(dest("./dist/js/jquery/slick"))
+}
+const buildSlickSass = () => {
+  return src("./node_modules/slick-carousel/slick/slick.scss","./node_modules/slick-carousel/slick/slick-theme.scss")
+    .pipe(sass({ outputStyle: "compressed" }))
+    .pipe(dest("./dist/css/slick"))
+}
+const buildSlickThemeSass = () => {
+  return src("./node_modules/slick-carousel/slick/slick-theme.scss")
+    .pipe(sass({ outputStyle: "compressed" }))
+    .pipe(dest("./dist/css/slick"))
+}
 
 
 const deletFiles = async (cb) => {
-  const filesToDelete = ["./dist/css/style.css.map", "./dist/js/main.js.map"]
+  const filesToDelete = ["./dist/css/style.css.map", "./dist/js/main.js.map", "./dist/js/sub.js.map"]
 
   let deletedCount = 0
 
@@ -140,6 +155,6 @@ const deletFiles = async (cb) => {
   })
 }
 // watch設定
-exports.default = watchFiles
+exports.dev = parallel(watchFiles, buildSass, buildJs, buildJquery)
 // build設定
-exports.build = parallel(buildSass, buildJs, deletFiles, buildJquery, icon, copyImage)
+exports.build = parallel(buildSass, buildJs, deletFiles, buildJquery, icon, copyImage, buildSlickJs, buildSlickSass, buildSlickThemeSass)
