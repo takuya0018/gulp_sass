@@ -187,6 +187,7 @@
     "set-blocking": "^2.0.0",
     "set-function-length": "^1.1.1",
     "set-value": "^2.0.1",
+    "slick-carousel": "^1.8.1",
     "snapdragon": "^0.8.2",
     "snapdragon-node": "^2.1.1",
     "snapdragon-util": "^3.0.1",
@@ -229,7 +230,7 @@
     "yargs-parser": "^5.0.1"
   },
   "scripts": {
-    "dev": "npx gulp",
+    "dev": "npx gulp dev",
     "build": "npx gulp build"
   },
   "keywords": [],
