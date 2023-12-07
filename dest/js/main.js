@@ -1,1 +1,0 @@
-"use strict";var button=document.getElementById("id");console.log(button.innerHTML);

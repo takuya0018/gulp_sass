@@ -1,9 +1,9 @@
 'use strict';
 
 // // jQuery
-// $(function(){
-//     console.log("aaa");
-// });
+$(function(){
+    console.log("aaa");
+});
 
 
 var button = document.getElementById('id');
