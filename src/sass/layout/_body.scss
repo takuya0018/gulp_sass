@@ -19,4 +19,26 @@ body {
       font-size: 1rem;
     }
   }
+  .gridwrap {
+    display: grid;
+    grid-template:
+      "child01" 300px
+      "child02" 1fr
+      "child03" 400px
+      / minmax(100px,1fr) minmax(100px,1fr) minmax(100px,1fr);
+      gap: 2vw;
+    .item01 {
+      // outline: 1px solid blue($color: #44afbb);
+      border: 1px solid;
+      &:nth-of-type(1) {
+        grid-area: "child01";
+      }
+      &:nth-of-type(2) {
+        grid-area: "child02";
+      }
+      &:nth-of-type(3) {
+        grid-area: "child03";
+      }
+    }
+  }
 }
