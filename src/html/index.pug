@@ -11,15 +11,29 @@
   <script src="./js/main.js" type="module" defer></script>
 </head>
 <body>
-  <div class="content">
-    <p class="def">こんばんわ。こんにちは</p>
-  </div>
-  <h1 class="abc" id="id">こんにちは、そろそろ寝る時間です。おやすみなさい。</h1>
-  <h1 class="abc" id="id">cccca</h1>
-  <div class="gridwrap">
-    <div class="item01"></div>
-    <div class="item01"></div>
-    <div class="item01"></div>
-  </div>
+  //- タブ
+  .tab-wrapper
+    .tab
+      input#tab-a(type="radio")(name="tab-radio").tab-input(value="usage")(checked="")
+      h2.tab-label-heading.selected
+        label.tab-label(for="tab-a") タブA
+    .tab
+      input#tab-b(type="radio")(name="tab-radio").tab-input(value="type")
+      h2.tab-label-heading
+        label.tab-label(for="tab-b") タブB
+    .tab
+      input#tab-c(type="radio")(name="tab-radio").tab-input(value="maker")
+      h2.tab-label-heading
+        label.tab-label(for="tab-c") タブC
+  //- タブ中身
+  .tab-panel.panel-a
+    div
+      p タブAの中身
+  .tab-panel.panel-b
+    div
+      p タブBの中身
+  .tab-panel.panel-c
+    div
+      p タブCの中身
 </body>
 </html>
